@@ -16,30 +16,30 @@ Conclusió: La nostra configuració supera amb escreix els requisits mínims de 
 Pas 1: Configuració d'idioma i teclat
 A la primera pantalla de setup, configurem l'idioma d'instal·lació a anglès (USA) però el format hora/moneda i el teclat a espanyol. Això permet tenir la base en anglès (més compatible) però la interfície adaptada al nostre entorn.
 
-https:///tasca04/img_t04/captura1.png
+https:///tasca04/img_T04/captura1.png
 
-https:///tasca04/img_t04/captura4.png
+https:///tasca04/img_T04/captura4.png
 
 Pas 2: Tipus d'instal·lació
 Seleccionem "Install Windows Server" i acceptem que es borraran totes les dades (és una instal·lació nova).
 
-https:///tasca04/img_t04/captura5.png
+https:///tasca04/img_T04/captura5.png
 
 Pas 3: Selecció d'edició
 Triem Windows Server 2025 Standard Evaluation (Desktop Experience) per tenir l'entorn gràfic (GUI), necessari per a la gestió visual.
 
-https:///tasca04/img_t04/captura6.png
+https:///tasca04/img_T04/captura6.png
 
 Pas 4: Configuració d'administrador
 Creem la contrasenya per al compte Administrator. És molt important posar una contrasenya segura i recordar-la.
 
-https:///tasca04/img_t04/captura7.png
+https:///tasca04/img_T04/captura7.png
 
 3. Configuració Post-Instal·lació
 Canvi de nom de l'equip
 Un cop dins del sistema, anem a Server Manager → Local Server → Properties i canviem el nom de l'equip a DC26 (en aquest cas, el número 26 correspon al número de llista).
 
-https:///tasca04/img_t04/captura2.png
+https:///tasca04/img_T04/captura2.png
 
 Observació: Després de canviar el nom, cal reiniciar el servidor perquè els canvis tinguin efecte.
 
@@ -52,7 +52,7 @@ Una en mode host-only (per xarxa interna)
 
 També configurem el DNS a 127.0.0.1 (localhost) perquè més endavant aquest servidor farà de controlador de domini i servidor DNS.
 
-https:///tasca04/img_t04/captura3.png
+https:///tasca04/img_T04/captura3.png
 
 4. Actualització del Sistema
 Procés d'actualització
