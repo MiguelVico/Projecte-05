@@ -88,6 +88,6 @@ Aquesta tasca promou:
 
 ---
 
-**Autor**: [El teu nom]  
-**Data**: [Data de realització]  
+**Autor**: [Miquel Vico]  
+**Data**: [21/1/2026]  
 **Curs**: 0224 Sistemes Operatius en Xarxa
