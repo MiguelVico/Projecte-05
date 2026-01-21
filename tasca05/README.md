@@ -95,4 +95,6 @@ Install-ADDSForest `
 
 ---
 
-
+**Autor**: [Miquel Vico]  
+**Data**: [21/1/2026]  
+**Curs**: 0224 Sistemes Operatius en Xarxa
