@@ -16,30 +16,42 @@ Conclusió: La nostra configuració supera amb escreix els requisits mínims de 
 Pas 1: Configuració d'idioma i teclat
 A la primera pantalla de setup, configurem l'idioma d'instal·lació a anglès (USA) però el format hora/moneda i el teclat a espanyol. Això permet tenir la base en anglès (més compatible) però la interfície adaptada al nostre entorn.
 
-https:///tasca04/img_T04/captura1.png
+https:/tasca04/img_T04/captura1.png
+
+Descripció: La imatge mostra la pantalla inicial de Windows Server Setup on es selecciona l'idioma d'instal·lació com a anglès (Estats Units) i el format d'hora i moneda com a espanyol (Espanya).
 
 https:///tasca04/img_T04/captura4.png
+
+Descripció: Pantalla de selecció del mètode d'entrada del teclat, triant l'opció "Spanish" per utilitzar un teclat en espanyol durant la instal·lació.
 
 Pas 2: Tipus d'instal·lació
 Seleccionem "Install Windows Server" i acceptem que es borraran totes les dades (és una instal·lació nova).
 
 https:///tasca04/img_T04/captura5.png
 
+Descripció: Imatge on es tria l'opció "Install Windows Server" i s'accepta l'avís que es borraran tots els fitxers, aplicacions i configuracions.
+
 Pas 3: Selecció d'edició
 Triem Windows Server 2025 Standard Evaluation (Desktop Experience) per tenir l'entorn gràfic (GUI), necessari per a la gestió visual.
 
 https:///tasca04/img_T04/captura6.png
+
+Descripció: Menú per triar l'edició del sistema operatiu, seleccionant Windows Server 2025 Standard Evaluation amb Desktop Experience per tenir interfície gràfica.
 
 Pas 4: Configuració d'administrador
 Creem la contrasenya per al compte Administrator. És molt important posar una contrasenya segura i recordar-la.
 
 https:///tasca04/img_T04/captura7.png
 
+Descripció: Pantalla per establir la contrasenya del compte d'administrador del sistema, amb els camps per introduir i confirmar la contrasenya.
+
 3. Configuració Post-Instal·lació
 Canvi de nom de l'equip
 Un cop dins del sistema, anem a Server Manager → Local Server → Properties i canviem el nom de l'equip a DC26 (en aquest cas, el número 26 correspon al número de llista).
 
 https:///tasca04/img_T04/captura2.png
+
+Descripció: Captura del Server Manager mostrant el nom de l'equip canviat a DC26 i el missatge que indica que cal reiniciar per aplicar els canvis.
 
 Observació: Després de canviar el nom, cal reiniciar el servidor perquè els canvis tinguin efecte.
 
@@ -53,6 +65,8 @@ Una en mode host-only (per xarxa interna)
 També configurem el DNS a 127.0.0.1 (localhost) perquè més endavant aquest servidor farà de controlador de domini i servidor DNS.
 
 https:///tasca04/img_T04/captura3.png
+
+Descripció: Pantalla de configuració de DNS on s'estableix l'adreça 127.0.0.1 com a servidor DNS preferit per al servidor.
 
 4. Actualització del Sistema
 Procés d'actualització
