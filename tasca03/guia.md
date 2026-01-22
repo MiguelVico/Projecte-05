@@ -9,7 +9,7 @@ Aquesta guia explica com configurar un servidor FTP utilitzant **vsftpd** a Ubun
 ### 1.1 Actualització del sistema
 Abans de començar, és bona pràctica actualitzar el sistema per assegurar-se que tenim les darreres versions dels paquets.
 
-![Actualització del sistema](/tasca03/img_T03/captura2.png)
+![Actualització del sistema](/tasca03/imgT03/captura2.png)
 
 **Comandes utilitzades:**
 ```bash
@@ -24,7 +24,7 @@ Amb aquestes comandes actualitzem la llista de paquets disponibles i després ac
 ### 1.2 Instal·lació del servidor vsftpd
 Instal·lem el paquet `vsftpd`, que és el servidor FTP que utilitzarem.
 
-![Instal·lació de vsftpd](/tasca03/img_T03/captura1.png)
+![Instal·lació de vsftpd](/tasca03/imgT03/captura1.png)
 
 **Comanda utilitzada:**
 ```bash
@@ -38,7 +38,7 @@ Aquí s’instal·len dos paquets: `vsftpd` (el servidor) i `ssl-cert` (per a ce
 ### 1.3 Còpia de seguretat del fitxer de configuració
 Abans de modificar res, fem una còpia de seguretat del fitxer de configuració original per si alguna cosa falla.
 
-![Còpia de seguretat](/tasca03/img_T03/captura3.png)
+![Còpia de seguretat](/tasca03/imgT03/captura3.png)
 
 **Comandes utilitzades:**
 ```bash
@@ -53,7 +53,7 @@ Es creen dues còpies del fitxer de configuració. Una amb el nom `.original` i 
 ### 1.4 Verificació de l’estat del servidor
 Comprovem que el servei està actiu i funcionant després de la instal·lació.
 
-![Estat del servei](/tasca03/img_T03/captura3.png)
+![Estat del servei](/tasca03/imgT03/captura3.png)
 
 **Comanda utilitzada:**
 ```bash
@@ -69,7 +69,7 @@ El servei està `active (running)`, això vol dir que el servidor FTP ja està e
 ### 2.1 Configuració del fitxer `vsftpd.conf`
 Aquí és on configurem el comportament del servidor FTP. Per exemple, podem permetre o denegar l’accés anònim, activar l’escriptura, etc.
 
-![Configuració del fitxer](/tasca03/img_T03/captura4.png)
+![Configuració del fitxer](/tasca03/imgT03/captura4.png)
 
 **Configuracions principals vistes:**
 - `listen_ipv6=YES`: escolta en IPv6.
@@ -82,7 +82,7 @@ Aquí és on configurem el comportament del servidor FTP. Per exemple, podem per
 ### 2.2 Reinici del servei
 Després de modificar la configuració, hem de reiniciar el servei perquè els canvis tinguin efecte.
 
-![Reinici del servei](/tasca03/img_T03/captura5.png)
+![Reinici del servei](/tasca03/imgT03/captura5.png)
 
 **Comanda utilitzada:**
 ```bash
@@ -98,7 +98,7 @@ Amb aquesta comanda reiniciem el servei vsftpd perquè carregui la nova configur
 ### 3.1 Creació del directori FTP
 Creem el directori on es serviran els fitxers via FTP.
 
-![Creació del directori FTP](/tasca03/img_T03/captura6.png)
+![Creació del directori FTP](/tasca03/imgT03/captura6.png)
 
 **Comandes utilitzades:**
 ```bash
@@ -116,7 +116,7 @@ sudo chmod 755 /srv/ftp
 ### 3.2 Estructura de directoris
 Dins del directori FTP, creem una estructura organitzada (subdirectoris per a diferents tipus de fitxers).
 
-![Estructura de directoris](/tasca03/img_T03/captura7.png)
+![Estructura de directoris](/tasca03/imgT03/captura7.png)
 
 **Comandes utilitzades:**
 ```bash
@@ -132,7 +132,7 @@ Es creen tres subdirectoris dins de `/srv/ftp/pub/` per organitzar els fitxers: 
 ### 3.3 Creació de fitxers d’exemple
 Afegim alguns fitxers de prova als directoris creats.
 
-![Creació de fitxers](/tasca03/img_T03/captura8.png)
+![Creació de fitxers](/tasca03/imgT03/captura8.png)
 
 **Comandes utilitzades:**
 ```bash
@@ -147,7 +147,7 @@ El `tee` s’utilitza per escriure tant a un fitxer com a la pantalla. Creem un 
 ### 3.4 Creació de fitxers buits
 També creem alguns fitxers buits per simular contingut multimèdia.
 
-![Fitxers buits](/tasca03/img_T03/captura9.png)
+![Fitxers buits](/tasca03/imgT03/captura9.png)
 
 **Comandes utilitzades:**
 ```bash
@@ -162,7 +162,7 @@ El `touch` crea fitxers buits si no existeixen. Aquí simulem una cançó MP3 i 
 ### 3.5 Comprovació de l’estructura final
 Llistem el contingut del directori FTP per veure com ha quedat tot.
 
-![Estructura final](/tasca03/img_T03/captura10.png)
+![Estructura final](/tasca03/imgT03/captura10.png)
 
 **Comanda utilitzada:**
 ```bash
@@ -178,7 +178,7 @@ Es veu el fitxer `info.txt` i el directori `pub`, amb els permisos i propietaris
 ### 4.1 Creació de l’usuari `prova1`
 Creem el primer usuari per accedir al FTP de manera autenticada.
 
-![Creació de prova1](/tasca03/img_T03/captura11.png)
+![Creació de prova1](/tasca03/imgT03/captura11.png)
 
 **Comanda utilitzada:**
 ```bash
@@ -192,7 +192,7 @@ L’usuari `prova1` es crea amb UID/GID 1001, se li assigna la seva pròpia carp
 ### 4.2 Creació de l’usuari `prova2`
 Creem un segon usuari per tenir més d’un usuari de prova.
 
-![Creació de prova2](/tasca03/img_T03/captura12.png)
+![Creació de prova2](/tasca03/imgT03/captura12.png)
 
 **Comanda utilitzada:**
 ```bash
@@ -206,7 +206,7 @@ sudo adduser prova2
 ### 4.3 Verificació dels usuaris creats
 Comprovem que els usuaris s’han creat correctament amb els grups corresponents.
 
-![Verificació d’usuaris](/tasca03/img_T03/captura13.png)
+![Verificació d’usuaris](/tasca03/imgT03/captura13.png)
 
 **Comandes utilitzades:**
 ```bash
@@ -223,7 +223,7 @@ Amb `id` veiem l’UID, GID i grups als que pertany cada usuari. Tots dos pertan
 ### 5.1 Configuració final de vsftpd.conf
 Abans de reiniciar, ens assegurem que la configuració estigui correcta, especialment que l’accés anònim estigui desactivat.
 
-![Configuració final](/tasca03/img_T03/captura14.png)
+![Configuració final](/tasca03/imgT03/captura14.png)
 
 **Anàlisi:**
 Es confirma que `anonymous_enable=NO`, `local_enable=YES` i `write_enable=YES`. Això vol dir que només usuaris locals podran connectar-se i podran pujar fitxers.
@@ -233,7 +233,7 @@ Es confirma que `anonymous_enable=NO`, `local_enable=YES` i `write_enable=YES`. 
 ### 5.2 Reinici definitiu
 Reiniciem el servei per aplicar totes les configuracions.
 
-![Reinici definitiu](/tasca03/img_T03/captura15.png)
+![Reinici definitiu](/tasca03/imgT03/captura15.png)
 
 **Comanda utilitzada:**
 ```bash
@@ -266,7 +266,7 @@ Continuem amb la segona part de la configuració del servidor FTP, on veurem com
 ### 6.1 Connexió amb l’usuari `prova1`
 Ens connectem al servidor FTP des de la mateixa màquina utilitzant `localhost`.
 
-![Connexió FTP local](/tasca03/img_T03/captura16.png)
+![Connexió FTP local](/tasca03/imgT03/captura16.png)
 
 **Comanda utilitzada:**
 ```bash
@@ -283,7 +283,7 @@ ftp localhost
 ### 6.2 Pujada d’un fitxer (`put`)
 Pujem un fitxer des del client al servidor.
 
-![Pujada de fitxer](/tasca03/img_T03/captura16.png)
+![Pujada de fitxer](/tasca03/imgT03/captura16.png)
 
 **Comanda utilitzada dins de FTP:**
 ```bash
@@ -299,7 +299,7 @@ put prova1.txt
 ### 6.3 Accés a directoris restringits i descàrrega
 Provem d’accedir a `/etc` i descarregar el fitxer `passwd`.
 
-![Accés a /etc i descàrrega](/tasca03/img_T03/captura17.png)
+![Accés a /etc i descàrrega](/tasca03/imgT03/captura17.png)
 
 **Comandes utilitzades dins de FTP:**
 ```bash
@@ -318,7 +318,7 @@ get passwd
 ### 7.1 Activació del chroot
 Per evitar que els usuaris puguin sortir del seu directori principal, activem l’opció `chroot_local_user`.
 
-![Configuració chroot](/tasca03/img_T03/captura18.png)
+![Configuració chroot](/tasca03/imgT03/captura18.png)
 
 **Configuració afegida a `/etc/vsftpd.conf`:**
 ```bash
@@ -334,7 +334,7 @@ allow_writeable_chroot=YES
 ### 7.2 Reinici del servei
 Apliquem els canvis de configuració.
 
-![Reinici amb chroot](/tasca03/img_T03/captura19.png)
+![Reinici amb chroot](/tasca03/imgT03/captura19.png)
 
 **Comanda utilitzada:**
 ```bash
@@ -348,7 +348,7 @@ Reiniciem el servei perquè la configuració de chroot tingui efecte.
 ### 7.3 Prova del chroot
 Tornem a connectar-nos i provem d’accedir a `/etc`.
 
-![Prova chroot](/tasca03/img_T03/captura20.png)
+![Prova chroot](/tasca03/imgT03/captura20.png)
 
 **Comandes dins de FTP:**
 ```bash
@@ -366,7 +366,7 @@ cd /etc
 ### 8.1 Visualització de l’estructura
 Utilitzem `tree` per veure tota l’estructura de directoris i fitxers que hem creat per a l’accés anònim/públic.
 
-![Estructura amb tree](/tasca03/img_T03/captura21.png)
+![Estructura amb tree](/tasca03/imgT03/captura21.png)
 
 **Comanda utilitzada:**
 ```bash
@@ -384,7 +384,7 @@ sudo tree /srv/
 ### 9.1 Instal·lació de Wireshark
 Instal·lem Wireshark per capturar i analitzar el trànsit de xarxa (útil per veure com viatgen les dades FTP).
 
-![Instal·lació de Wireshark](/tasca03/img_T03/captura22.png)
+![Instal·lació de Wireshark](/tasca03/imgT03/captura22.png)
 
 **Comanda utilitzada:**
 ```bash
@@ -400,7 +400,7 @@ sudo apt install wireshark
 ### 9.2 Instal·lació del client FTP
 Assegurem-nos que tenim el client FTP instal·lat per fer connexions des de la terminal.
 
-![Instal·lació del client FTP](/tasca03/img_T03/captura23.png)
+![Instal·lació del client FTP](/tasca03/imgT03/captura23.png)
 
 **Comanda utilitzada:**
 ```bash
@@ -417,7 +417,7 @@ sudo apt install ftp -y
 ### 10.1 Connexió des d’un client extern
 Ara ens connectem al servidor FTP utilitzant la seva IP (`192.168.56.101`) des d’un altre equip de la xarxa.
 
-![Connexió des d’una altra IP](/tasca03/img_T03/captura24.png)
+![Connexió des d’una altra IP](/tasca03/imgT03/captura24.png)
 
 **Comanda utilitzada:**
 ```bash
@@ -435,7 +435,7 @@ ftp 192.168.56.101
 ### 11.1 Captura de paquets FTP
 Capturem el trànsit de xarxa durant una connexió FTP per veure com es transmeten les dades.
 
-![Captura Wireshark](/tasca03/img_T03/captura25.png)
+![Captura Wireshark](/tasca03/imgT03/captura25.png)
 
 **Anàlisi:**
 - Es veuen paquets TCP i FTP entre `192.168.56.101` (servidor) i `192.168.56.102` (client).
@@ -450,9 +450,9 @@ Capturem el trànsit de xarxa durant una connexió FTP per veure com es transmet
 ### 12.1 Descàrrega i instal·lació de FileZilla
 Descarreguem i instal·lem FileZilla Client, un client gràfic FTP molt popular.
 
-![Descàrrega FileZilla](/tasca03/img_T03/captura26.png)
-![Instal·lació FileZilla 1](/tasca03/img_T03/captura27.png)
-![Instal·lació FileZilla 2](/tasca03/img_T03/captura28.png)
+![Descàrrega FileZilla](/tasca03/imgT03/captura26.png)
+![Instal·lació FileZilla 1](/tasca03/imgT03/captura27.png)
+![Instal·lació FileZilla 2](/tasca03/imgT03/captura28.png)
 
 **Anàlisi:**
 - FileZilla és gratuït i multiplataforma.
@@ -464,7 +464,7 @@ Descarreguem i instal·lem FileZilla Client, un client gràfic FTP molt popular.
 ### 12.2 Connexió amb el servidor FTP
 Configurem FileZilla per connectar-nos al nostre servidor.
 
-![Configuració connexió FileZilla](/tasca03/img_T03/captura29.png)
+![Configuració connexió FileZilla](/tasca03/imgT03/captura29.png)
 
 **Configuració:**
 - **Servidor:** `192.168.56.101`
@@ -477,7 +477,7 @@ Configurem FileZilla per connectar-nos al nostre servidor.
 ### 12.3 Navegació i transferència
 Un cop connectats, naveguem pels directoris del servidor.
 
-![Navegació FileZilla](/tasca03/img_T03/captura30.png)
+![Navegació FileZilla](/tasca03/imgT03/captura30.png)
 
 **Anàlisi:**
 - A l’esquerra veiem els fitxers locals (Windows).
