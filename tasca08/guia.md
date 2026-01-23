@@ -203,7 +203,7 @@ A la **captura25.png** es demana la contrasenya per descomprimir el fitxer Wanna
 
 ![Demana contrasenya per descomprimir WannaCry](/tasca08/imgT08/captura25.png)
 
-**Anàlisi**: La contrasenya actua com a seguretat addicional. Sense ella, no es pot extreure el contingut maliciós. Això és clau quan es treballa amb mostres perilloses.
+**Anàlisi**: La contrasenya actua com a seguretat addicional. Sense ella, no es pot extreure el contingut maliciós. Això és clau quan es treballa amb mostres perilloses. Posem la contrasenya ("infected") per obrir el programa.
 
 ---
 
