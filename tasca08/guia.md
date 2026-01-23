@@ -154,7 +154,7 @@ A la **captura18.png** es torna a executar el script `PSRansom.ps1`, similar a a
 
 ---
 
-A la **captura19.png** es mostra l'estat dels fitxers després de l'execució. Es veuen els fitxers `prova1`, `prova2`, `prova3` amb data de modificació recent.
+A la **captura19.png** es mostra l'estat dels fitxers després de l'execució. Es veuen els fitxers `prova1`, `prova2`, `prova3` que han sigut desxifrats.
 
 ![Fitxers després del xifrat](/tasca08/imgT08/captura19.png)
 
