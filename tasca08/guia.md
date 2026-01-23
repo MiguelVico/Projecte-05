@@ -24,7 +24,7 @@ En aquesta tasca hem vist com funciona la protecció contra malware en Windows 1
 
 Abans de res, cal veure com està configurada la seguretat del sistema. A la **captura1.png** es mostra la configuració de seguretat de Microsoft Edge, on es poden gestionar certificats, activar SmartScreen, bloquejar aplicacions no desitjades i configurar DNS segur.
 
-![Configuració de seguretat de Microsoft Edge](/tasca08/img_T08/captura1.png)
+![Configuració de seguretat de Microsoft Edge](/tasca08/imgT08/captura1.png)
 
 **Anàlisi**: Aquí es veu que l’usuari té accés a totes les opcions de seguretat del navegador, incloent protecció contra phishing i descarregues malicioses. Això és la primera línia de defensa quan naveguem per Internet.
 
@@ -32,8 +32,8 @@ Abans de res, cal veure com està configurada la seguretat del sistema. A la **c
 
 A la **captura5.png** i **captura6.png** es mostra el panell de seguretat de Windows Security. Tot està en verd, així que el sistema diu que “No es requereix cap acció”. Però cal anar amb compte, perquè de vegades aquestes alertes no detecten tot.
 
-![Panell de seguretat de Windows](/tasca08/img_T08/captura5.png)
-![Estat de la protecció antivirus](/tasca08/img_T08/captura6.png)
+![Panell de seguretat de Windows](/tasca08/imgT08/captura5.png)
+![Estat de la protecció antivirus](/tasca08/imgT08/captura6.png)
 
 **Anàlisi**: Tot sembla correcte, però hem de verificar si la protecció en temps real està activada. Més endavant veurem que no ho estava, i això va ser clau.
 
@@ -45,8 +45,8 @@ Per provar si l’antivirus funciona, es fa servir un fitxer de prova anomenat *
 
 A la **captura2.png** i **captura3.png** es veu la pàgina web d’EICAR, on es poden descarregar diverses versions del fitxer de prova.
 
-![Pàgina web d'EICAR](/tasca08/img_T08/captura2.png)
-![Àrea de descàrrega d'EICAR](/tasca08/img_T08/captura3.png)
+![Pàgina web d'EICAR](/tasca08/imgT08/captura2.png)
+![Àrea de descàrrega d'EICAR](/tasca08/imgT08/captura3.png)
 
 **Anàlisi**: El fitxer EICAR és un estàndard de la indústria per provar antivirus. No fa mal, però si l’antivirus el detecta, vol dir que està actiu i vigilant.
 
@@ -54,7 +54,7 @@ A la **captura2.png** i **captura3.png** es veu la pàgina web d’EICAR, on es 
 
 A la **captura4.png** es veu com Microsoft Edge amb SmartScreen activat **bloqueja la descàrrega** del fitxer `eicar_com.zip` perquè detecta que és un virus.
 
-![Descàrrega bloquejada per SmartScreen](/tasca08/img_T08/captura4.png)
+![Descàrrega bloquejada per SmartScreen](/tasca08/imgT08/captura4.png)
 
 **Anàlisi**: El navegador actua com a primera barrera i evita que es descarregui un fitxer potencialment perillós, encara que en aquest cas sigui només de prova. Això demostra que les proteccions integrades funcionen.
 
@@ -62,8 +62,8 @@ A la **captura4.png** es veu com Microsoft Edge amb SmartScreen activat **bloque
 
 Tot i així, l’usuari descarrega altres versions del fitxer EICAR com `.7z`, `.tar`, i `.zip` com es veu a la **captura11.png** i **captura12.png**.
 
-![Contingut de la carpeta Descàrregues](/tasca08/img_T08/captura11.png)
-![Fitxers EICAR descarregats](/tasca08/img_T08/captura12.png)
+![Contingut de la carpeta Descàrregues](/tasca08/imgT08/captura11.png)
+![Fitxers EICAR descarregats](/tasca08/imgT08/captura12.png)
 
 **Anàlisi**: L’usuari ha pogut descarregar els fitxers comprimits. Això pot ser perquè l’antivirus no escaneja fitxers comprimits amb la mateixa agressivitat, o perquè la protecció en temps real no està activada.
 
@@ -71,7 +71,7 @@ Tot i així, l’usuari descarrega altres versions del fitxer EICAR com `.7z`, `
 
 A la **captura10.png** es mostra una alerta de Windows Security quan s’intenta executar `eicar.com`. El sistema l’identifica com a “Arxiu malintencionat” i recomana no executar-lo.
 
-![Alerta de fitxer malintencionat](/tasca08/img_T08/captura10.png)
+![Alerta de fitxer malintencionat](/tasca08/imgT08/captura10.png)
 
 **Anàlisi**: Windows Defender sí que detecta l’amenaça quan es vol executar el fitxer. És una protecció en segon nivell, però depèn que l’usuari no ignori l’avís.
 
@@ -83,7 +83,7 @@ Aquí ve el més intens: simular un atac de ransomware. Primer, l’usuari desca
 
 Abans d’executar-lo, cal canviar la política d’execució de PowerShell per permetre scripts no signats. Això es veu a la **captura14.png**.
 
-![Canvi de política d'execució a PowerShell](/tasca08/img_T08/captura14.png)
+![Canvi de política d'execució a PowerShell](/tasca08/imgT08/captura14.png)
 
 **Anàlisi**: Amb la comanda `Set-ExecutionPolicy -ExecutionPolicy Unrestricted` s’eliminen les restriccions per executar scripts. Això és **molt perillós** i només s’ha de fer en entorns de prova com aquest.
 
@@ -91,7 +91,7 @@ Abans d’executar-lo, cal canviar la política d’execució de PowerShell per 
 
 Després, s’executa el script `PSRansom.ps1` (captura15.png). El script simula un atac de ransomware: genera una clau AES de 256 bits, xifra fitxers de prova i guarda un log a `readme.txt`.
 
-![Execució del ransomware simulat](/tasca08/img_T08/captura15.png)
+![Execució del ransomware simulat](/tasca08/imgT08/captura15.png)
 
 **Anàlisi**: El script mostra informació del sistema (hostname, usuari, hora) i simula la comunicació amb un servidor de Comandament i Control (C&C). Com el servidor està caigut, genera una clau local i xifra els fitxers. Això passa perquè l’antivirus no ha detectat el script com a maliciós, possiblement perquè la protecció en temps real estava desactivada.
 
@@ -101,7 +101,7 @@ Després, s’executa el script `PSRansom.ps1` (captura15.png). El script simula
 
 Després de l’execució, els fitxers de prova (`prova1.txt`, `prova2.txt`, `prova3.txt`) queden xifrats amb extensió `.psr` (captura16.png).
 
-![Fitxers xifrats després de l'atac](/tasca08/img_T08/captura16.png)
+![Fitxers xifrats després de l'atac](/tasca08/imgT08/captura16.png)
 
 **Anàlisi**: Els fitxers originals han estat reemplaçats per versions xifrades. El ransomware també ha creat un fitxer `readme.txt` amb les instruccions (suposem) i la clau de xifrat.
 
@@ -109,7 +109,7 @@ Després de l’execució, els fitxers de prova (`prova1.txt`, `prova2.txt`, `pr
 
 Si obrim un fitxer xifrat (captura17.png), es veu contingut binari/aleatori, confirmant que està xifrat.
 
-![Contingut d'un fitxer xifrat](/tasca08/img_T08/captura17.png)
+![Contingut d'un fitxer xifrat](/tasca08/imgT08/captura17.png)
 
 **Anàlisi**: El fitxer original ja no és llegible. Sense la clau de desxifrat, és impossible recuperar-lo. Així actua un ransomware real.
 
