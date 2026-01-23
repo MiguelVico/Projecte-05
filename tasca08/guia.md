@@ -195,7 +195,7 @@ A la **captura24.png** es veu que s'ha descarregat el fitxer `Ransomware.WannaCr
 
 ![Descàrrega de WannaCry](/tasca08/imgT08/captura24.png)
 
-**Anàlisi**: El fitxer està comprimit i protegit amb contrasenya (segurament "infected" o "malware") per evitar execucions accidentals. Això és una pràctica comuna en repositoris de malware.
+**Anàlisi**: El fitxer està comprimit i protegit amb contrasenya ("infected") per evitar execucions accidentals. Això és una pràctica comuna en repositoris de malware.
 
 ---
 
