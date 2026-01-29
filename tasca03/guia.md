@@ -510,7 +510,7 @@ sudo systemctl status ssh
 sudo apt install openssh-server -y
 ```
 
-![Instal·lació OpenSSH Server](/tasca03/img_T03/captura31.png)
+![Instal·lació OpenSSH Server](/tasca03/imgT03/captura31.png)
 
 **Anàlisi:**
 - OpenSSH Server ja estava instal·lat a la versió 9.6p1
@@ -523,7 +523,7 @@ sudo apt install openssh-server -y
 sftp usuari@192.168.56.101
 ```
 
-![Connexió SFTP inicial](/tasca03/img_T03/captura32.png)
+![Connexió SFTP inicial](/tasca03/imgT03/captura32.png)
 
 **Anàlisi:**
 - Primer contacte amb el servidor SSH/SFTP
@@ -537,7 +537,7 @@ sftp usuari@192.168.56.101
 ?
 ```
 
-![Comandaments SFTP disponibles](/tasca03/img_T03/captura33.png)
+![Comandaments SFTP disponibles](/tasca03/imgT03/captura33.png)
 
 **Anàlisi:**
 - `sftp>` és el prompt interactiu
@@ -556,7 +556,7 @@ pwd
 ls
 ```
 
-![Accés a /etc via SFTP](/tasca03/img_T03/captura34.png)
+![Accés a /etc via SFTP](/tasca03/imgT03/captura34.png)
 
 **Anàlisi:**
 - **Problema de seguretat greu**: L'usuari pot accedir a `/etc`
@@ -580,7 +580,7 @@ Match Group admins
     ForceCommand internal-sftp
 ```
 
-![Configuració chroot per a admins](/tasca03/img_T03/captura35.png)
+![Configuració chroot per a admins](/tasca03/imgT03/captura35.png)
 
 **Anàlisi:**
 - `Match Group admins`: Aplica aquesta configuració només als membres del grup `admins`
@@ -594,7 +594,7 @@ Match Group admins
 sudo addgroup admins
 ```
 
-![Creació grup admins](/tasca03/img_T03/captura36.png)
+![Creació grup admins](/tasca03/imgT03/captura36.png)
 
 ```bash
 # Crear usuari admin1 afegit al grup admins
@@ -602,7 +602,7 @@ sudo useradd -G admins admin1
 sudo passwd admin1
 ```
 
-![Creació usuari admin1](/tasca03/img_T03/captura37.png)
+![Creació usuari admin1](/tasca03/imgT03/captura37.png)
 
 **Anàlisi:**
 - Grup `admins` creat amb GID 1003
@@ -616,7 +616,7 @@ sudo mkdir /var/data
 sudo ls -l /var
 ```
 
-![Creació directori /var/data](/tasca03/img_T03/captura38.png)
+![Creació directori /var/data](/tasca03/imgT03/captura38.png)
 
 ```bash
 # Crear subdirectori per als fitxers dels usuaris
@@ -626,7 +626,7 @@ sudo chmod 2770 /var/data/files/
 sudo ls -l /var/data/
 ```
 
-![Configuració permisos del directori](/tasca03/img_T03/captura40.png)
+![Configuració permisos del directori](/tasca03/imgT03/captura40.png)
 
 **Anàlisi:**
 - `/var/data`: Directori root del chroot (ha de ser propietat de root)
@@ -646,7 +646,7 @@ sftp admin1@192.168.56.101
 
 **Important**: Abans de continuar, és important corregir un error comú:
 
-![Error de connexió SSH](/tasca03/img_T03/captura41.png)
+![Error de connexió SSH](/tasca03/imgT03/captura41.png)
 
 **Solució:**
 ```bash
