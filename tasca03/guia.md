@@ -485,6 +485,256 @@ Un cop connectats, naveguem pels directoris del servidor.
 - Podem arrossegar fitxers per pujar o baixar.
 - FileZilla també suporta **SFTP** i **FTPS** per a connexions xifrades.
 
+# Guia Completa Tasca 03: Serveis de Transferència de Fitxers (Actualitzada amb SFTP)
+
+## 📋 Índex
+1. [Configuració de la VM i Xarxa NAT](#1-configuració-de-la-vm-i-xarxa-nat)
+2. [Instal·lació i Configuració Bàsica de vsftpd](#2-instal·lació-i-configuració-bàsica-de-vsftpd)
+3. [Configuració d'Accés Anònim](#3-configuració-daccés-anònim)
+4. [Configuració d'Usuaris Autenticats i Engabiament (chroot)](#4-configuració-dusuaris-autenticats-i-engabiament-chroot)
+5. [Configuració de Seguretat TLS/FTPS](#5-configuració-de-seguretat-tlsftps)
+6. [Configuració de Servei SSH (sFTP)](#6-configuració-de-servei-ssh-sftp)
+7. [Configuració d'Usuaris Especials amb Permisos Diferencials](#7-configuració-dusuaris-especials-amb-permisos-diferencials)
+8. [Proves Finals i Documentació](#8-proves-finals-i-documentació)
+
+---
+
+## 6. Configuració de Servei SSH (sFTP) - ACTUALITZAT
+
+### 6.1 Verificació i Instal·lació d'OpenSSH Server
+```bash
+# Verificar si OpenSSH està instal·lat
+sudo systemctl status ssh
+
+# Instal·lar si no està present
+sudo apt install openssh-server -y
+```
+
+![Instal·lació OpenSSH Server](/tasca03/img_T03/captura31.png)
+
+**Anàlisi:**
+- OpenSSH Server ja estava instal·lat a la versió 9.6p1
+- El servei està actiu i funcionant
+- Això ens permet configurar SFTP (FTP sobre SSH)
+
+### 6.2 Prova Bàsica de Connexió SFTP des de Windows
+```bash
+# Des d'un client Windows PowerShell
+sftp usuari@192.168.56.101
+```
+
+![Connexió SFTP inicial](/tasca03/img_T03/captura32.png)
+
+**Anàlisi:**
+- Primer contacte amb el servidor SSH/SFTP
+- S'afegeix la clau al `known_hosts` per seguretat
+- Autenticació exitosa amb l'usuari del sistema
+- Entrem al mode interactiu SFTP
+
+### 6.3 Comandaments Disponibles en SFTP
+```bash
+# Dins de la sessió SFTP
+?
+```
+
+![Comandaments SFTP disponibles](/tasca03/img_T03/captura33.png)
+
+**Anàlisi:**
+- `sftp>` és el prompt interactiu
+- Molts comandaments similars als de FTP tradicional:
+  - `get` i `put` per transferències
+  - `cd`, `ls`, `pwd` per navegació
+  - `mkdir`, `rmdir` per gestió de directoris
+  - `chmod`, `chown` per permisos (si ho permet l'usuari)
+- Comandaments específics de SFTP com `symlink`, `version`
+
+### 6.4 Problema de Seguretat: Accés a Directoris Sensibles
+```bash
+# Dins de SFTP, provem d'accedir a /etc
+cd /etc
+pwd
+ls
+```
+
+![Accés a /etc via SFTP](/tasca03/img_T03/captura34.png)
+
+**Anàlisi:**
+- **Problema de seguretat greu**: L'usuari pot accedir a `/etc`
+- Pot veure fitxers sensibles com `passwd`, `shadow`, `ssh/`
+- Això requereix configuració de **chroot per a SFTP**
+
+### 6.5 Configuració de Chroot per a Grups d'Administradors
+```bash
+# Editar configuració SSH
+sudo nano /etc/ssh/sshd_config
+```
+
+Afegim al final:
+```bash
+# Configuració per a grups d'administradors amb chroot
+Match Group admins
+    ChrootDirectory /var/data
+    X11Forwarding no
+    AllowTcpForwarding no
+    PermitTTY no
+    ForceCommand internal-sftp
+```
+
+![Configuració chroot per a admins](/tasca03/img_T03/captura35.png)
+
+**Anàlisi:**
+- `Match Group admins`: Aplica aquesta configuració només als membres del grup `admins`
+- `ChrootDirectory /var/data`: Engabia els usuaris a aquest directori
+- `ForceCommand internal-sftp`: Força l'ús de SFTP, no permet shell
+- `PermitTTY no`: No permet sessions interactives de terminal
+
+### 6.6 Creació del Grup i Usuaris Administradors
+```bash
+# Crear grup d'administradors
+sudo addgroup admins
+```
+
+![Creació grup admins](/tasca03/img_T03/captura36.png)
+
+```bash
+# Crear usuari admin1 afegit al grup admins
+sudo useradd -G admins admin1
+sudo passwd admin1
+```
+
+![Creació usuari admin1](/tasca03/img_T03/captura37.png)
+
+**Anàlisi:**
+- Grup `admins` creat amb GID 1003
+- Usuari `admin1` creat i afegit al grup
+- S'estableix contrasenya per a l'usuari
+
+### 6.7 Preparació del Directori Chroot
+```bash
+# Crear directori base per al chroot
+sudo mkdir /var/data
+sudo ls -l /var
+```
+
+![Creació directori /var/data](/tasca03/img_T03/captura38.png)
+
+```bash
+# Crear subdirectori per als fitxers dels usuaris
+sudo mkdir /var/data/files
+sudo chown :admins /var/data/files/
+sudo chmod 2770 /var/data/files/
+sudo ls -l /var/data/
+```
+
+![Configuració permisos del directori](/tasca03/img_T03/captura40.png)
+
+**Anàlisi:**
+- `/var/data`: Directori root del chroot (ha de ser propietat de root)
+- `/var/data/files`: Subdirectori compartit amb:
+  - `chmod 2770`: Permisos d'escriptura per al grup, amb sticky bit per a herència
+  - `chown :admins`: El grup propietari és `admins`
+  - **Nota**: En la captura 39 hi ha un error de tipus al primer comandament
+
+### 6.8 Prova de Connexió SFTP amb Usuari Administrador
+```bash
+# Reiniciar servei SSH per aplicar canvis
+sudo systemctl restart sshd
+
+# Provar connexió des de Windows
+sftp admin1@192.168.56.101
+```
+
+**Important**: Abans de continuar, és important corregir un error comú:
+
+![Error de connexió SSH](/tasca03/img_T03/captura41.png)
+
+**Solució:**
+```bash
+# Assegurar-se que l'usuari existeix
+sudo cat /etc/passwd | grep admin
+
+# Verificar grup
+groups admin1
+
+# Provar connexió correcta
+sftp admin1@192.168.56.101
+```
+
+### 6.9 Prova Final de SFTP amb Chroot
+```bash
+# Connexió correcta amb admin1
+sftp admin1@192.168.56.101
+
+# Dins de SFTP
+pwd
+ls
+cd /etc
+```
+
+**Resultat esperat:**
+- `pwd` mostra `/` (dins del chroot)
+- `ls` mostra `files/`
+- `cd /etc` **HAURIA DE FALLAR** (engabiat al chroot)
+- `cd files` funciona (directori compartit)
+
+### 6.10 Comparativa SFTP vs FTP Tradicional
+
+| **Característica** | **FTP** | **SFTP** |
+|-------------------|---------|----------|
+| **Port** | 21 (control), 20 (dades) | 22 |
+| **Xifrat** | No (o FTPS separat) | Sí (sobre SSH) |
+| **Autenticació** | Usuari/Contrasenya | Múltiples mètodes |
+| **Chroot** | Configuració complexa | Integrat a SSH |
+| **Transferència** | Modes actiu/passiu | Únic canal xifrat |
+| **Seguretat** | Baixa (dades en clar) | Alta |
+
+---
+
+## 7. Configuració d'Usuaris Especials amb Permisos Diferencials - ACTUALITZAT
+
+### 7.1 Estructura Final d'Usuaris i Grups
+```bash
+# Resum dels grups creats
+sudo cat /etc/group | grep -E "(admins|sysadmin|sftpusers|prova)"
+```
+
+**Grups implementats:**
+1. **admins**: Grup per a administradors SFTP amb chroot a `/var/data`
+2. **sysadmin**: Grup per a administradors FTP amb accés a `/etc`
+3. **sftpusers**: Grup per a usuaris SFTP normals (si es configura)
+4. **prova1/prova2**: Usuaris FTP bàsics
+
+### 7.2 Prova d'Accés Diferencial SFTP
+```bash
+# Prova 1: admin1 (grup admins) - CHROOT ACTIVAT
+sftp admin1@192.168.56.101
+pwd  # Mostra / (chroot)
+cd /etc  # Error: No such file or directory
+
+# Prova 2: prova1 (sense grups especials) - SENSE CHROOT SFTP
+sftp prova1@192.168.56.101
+pwd  # Mostra /home/prova1
+cd /etc  # Pot funcionar (depèn de configuració SSH)
+```
+
+### 7.3 Configuració de Múltiples Grups SFTP
+```bash
+# Configuració completa a /etc/ssh/sshd_config
+Match Group admins
+    ChrootDirectory /var/data
+    ForceCommand internal-sftp
+    
+Match Group sftpusers
+    ChrootDirectory /home
+    ForceCommand internal-sftp
+    
+Match User prova1
+    ChrootDirectory /home/prova1
+    ForceCommand internal-sftp
+```
+
+- ✅ Documentació completa amb totes les captures
+
 ---
 
 ## 📌 Resum final
