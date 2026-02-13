@@ -294,7 +294,7 @@ Finalment, a la **captura34.png** es mostra l'opció de tancar la màquina virtu
 Aquesta tasca m'ha obert els ulls sobre com de fàcil és que un malware entri al sistema si baixem la guardia, però també m'ha ensenyat que amb les eines i pràctiques adequades, es poden evitar desastres. Ara tinc més clara la importància de la seguretat en un entorn professional. 🚀👨‍💻
 
 
-#Preguntes:
+# Preguntes:
 
 # Sistemes de protecció Windows 11
 
